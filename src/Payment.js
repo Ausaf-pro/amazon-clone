@@ -20,6 +20,17 @@ function Payment() {
   const [error, setError] = useState(null);
   const [disabled, setDisabled] = useState(true);
   const [clientSecret, setClientSecret] = useState(true);
+  
+  
+
+
+  const handleClick = () => {
+      dispatch({
+        type: "EMPTY_BASKET",
+      });
+
+      history.replace("/orders");
+  }
 
   useEffect(() => {
     // generate the special stripe secret which allows us to charge a customer
@@ -35,11 +46,9 @@ function Payment() {
     getClientSecret();
   }, [basket]);
 
-  console.log("THE SECRET IS >>>", clientSecret);
-  console.log("👱", user);
-
   const handleSubmit = async (event) => {
     // do all the fancy stripe stuff...
+    
     event.preventDefault();
     setProcessing(true);
 
@@ -56,11 +65,6 @@ function Payment() {
         setError(null);
         setProcessing(false);
 
-        dispatch({
-          type: "EMPTY_BASKET",
-        });
-
-        history.replace("/orders");
       });
   };
 
@@ -129,7 +133,7 @@ function Payment() {
                   prefix={"$"}
                 />
                 <button
-                  onClick={e => history.push('/orders')}
+                  onClick={handleClick}
                   disabled={processing || disabled || succeeded}
                 >
                   <span>{processing ? <p>Processing</p> : "Buy Now"}</span>

@@ -1,50 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { db } from "./firebase";
-import './Orders.css'
-import { useStateValue } from "./StateProvider";
-// import Order from './Order'
-import { useHistory } from "react-router-dom";
-
+import React from "react";
+import {useStateValue} from './StateProvider'
+import './Order.css'
+import { useHistory } from 'react-router-dom'
+import MenuOpenRoundedIcon from '@material-ui/icons/MenuOpenRounded';
+import { Link } from 'react-router-dom'
 
 function Orders() {
-  const [{ basket, user }, dispatch] = useStateValue();
-  const [orders, setOrders] = useState([]);
-
   const history = useHistory();
 
 
-  useEffect(() => {
-    if(user) {
-        db
-        .collection('users')
-        .doc(user?.uid)
-        .collection('orders')
-        .orderBy('created', 'desc')
-        .onSnapshot(snapshot => (
-            setOrders(snapshot.docs.map(doc => ({
-                id: doc.id,
-                data: doc.data()
-            })))
-        ))
-    } else {
-        setOrders([])
-    }
-
-  }, [user])
-
-    return (
-        <div className='orders'>
-            <h1>Order successful</h1>
-
-            {/* <div className='orders__order'>
-                {orders?.map(order => (
-                    <Order order={order} />
-                ))}
-            </div> */}
-            <p>Click to continue to home page..</p>
-            <button className="orders__button" onClick={(e) => history.push("/")} >Redirect</button>
-        </div>
-    )
+  return (
+    <div className="orders">
+       <div className="order__container">
+         <h3>Order Successful </h3>
+         <h3>Thanks for shopping with us </h3>
+         <h3>Delivey details <MenuOpenRoundedIcon onClick={e => history.push('/delivery')} className="orders__details" /> </h3>
+         <button className="order__contaierButton">
+            <Link to="/" >
+               Home
+            </Link>
+         </button>
+       </div> 
+    </div>
+  );
 }
 
-export default Orders   
+export default Orders;

@@ -1,18 +1,24 @@
-.order {
-   padding: 40px;
-   margin: 20px 0;
-   border: 1px solid lightgray;
-   background-color: white;
-   position: relative;
+.order__container {
+   background-color: rgb(234, 237, 237);
+   margin: 30px;
 }
 
-.order__id {
-   position: absolute;
-   top: 40px;
-   right: 20px;
- }
+.order__container > h3 {
+   margin-bottom: 20px;
 
-.order__total {
-   font-weight: 500;
-   text-align: right;
- }
+}
+
+.order__contaierButton {
+   background: #f0c14b;
+   border: 1px solid;
+   margin-top: 10px;
+   border-color: #a88734 #9c7e31 #846a29;
+   border-radius: 3px;
+   color: #111;
+}
+
+.orders__details {
+   margin-top: 3px;
+   align-items: center;
+   cursor: pointer;
+}
